@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:30,&quot;proxyParams&quot;:{&quot;proxyHost&quot;:&quot;127.0.0.1&quot;,&quot;proxyPort&quot;:1080,&quot;proxyType&quot;:&quot;SOCKS&quot;}}" host="103.197.185.85" id="8f5b9e39-3777-4fd5-a8d2-61864167e34c" port="4433" nameFormat="DESCRIPTIVE" username="root" useOpenSSHConfig="true" />
+      <sshConfig authType="PASSWORD" host="23.248.192.114" id="53a5f153-64f7-4112-82f8-445b7bdd2341" port="47520" nameFormat="DESCRIPTIVE" username="root" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="application-name" content="SODO66">
+{#    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/assets/images/logo.png">#}
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/static/images/logo2.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="manifest" href="{{ manifest }}">
+    <title>{{ title }}</title>
+    <style>
+        *{margin: 0;padding: 0;box-sizing: border-box;}
+        html. body{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-size: 14px;}
+        #mainBox{width: 100vw;height: 100vh;position: fixed;top: 0;text-align: center;color: #fff;padding: 10vh 5vw;box-sizing: border-box;background-color: #000;z-index: 9999;background-color: rgba(0, 0, 0, 0.3);}
+        #mainBox .inter1{padding-top: 110px;margin: 0 45px;font-size: 24px;margin-top: 15vh;position: relative;overflow: hidden;}
+        .logo{height: 100px;position: relative;overflow: hidden;text-align: center;}
+        .logo img{height: 100%;display: block;overflow: hidden;position: relative;margin: auto;}
+        #description1, #description2{position: relative;overflow: hidden;text-align: center;padding: 15px 20px;display: none;}
+        #description1 p, #description2 p{text-align: center;font-size: 16px;margin-bottom: 30px;}
+
+        @keyframes topToBottom {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(0, 20px);
+            }
+        }
+
+        @media only screen and (max-width: 750px){
+            #mainBox .inter1{
+                padding-top: 0px;
+                margin: 0 25px;
+                margin-top: 5vh;
+            }
+            #mainBox{
+                padding: 10vh 3vw;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="mainBox" style="display: none">
+
+        <div class="inter1">
+
+            <div class="logo">
+                <img src="{{ logo }}" alt="">
+            </div>
+
+            {% if project_name == 'project_ws' %}
+            <div id="description1" style="display: none;">
+                <p>请使用IPHONE或IPAD进行访问</p>
+                <p>立即安装如下</p>
+                <p>使用Safari浏览器安装！</p>
+            </div>
+            <div id="description2">
+                <p style="margin-bottom: 20px;">万盛集团</p>
+                <p style="margin-bottom: 30px;">立即安装如下</p>
+                <p style="font-size: 25px; line-height: 30px;">要安装，<img src="/static/images/fenxiang.png" alt="" style="height: 20px; position: relative; display: inline-block;">请选择并继续选择添加到主屏幕</p>
+                <div style="margin-top: 5vh;background: url(/static/images/bottom.png) no-repeat top left;background-position: center;width: 100%;height: 80px;background-size: 40px;animation-duration: 0.5s;animation-name: topToBottom;animation-direction: alternate; animation-iteration-count: infinite;"></div>
+            </div>
+            {% else %}
+            <div id="description1" style="display: none;">
+                <p>Vui lòng sử dụng IPHONE hoặc IPAD truy cập</p>
+                <p>Cài đặt ngay bên dưới</p>
+                <p>bằng trình duyệt Safari để cài đặt!</p>
+            </div>
+            <div id="description2">
+                <p style="margin-bottom: 20px;">SODO66</p>
+                <p style="margin-bottom: 30px;">Cài đặt ngay bên dưới</p>
+                <p style="font-size: 25px; line-height: 30px;">Để cài đặt chọn <img src="/static/images/fenxiang.png" alt="" style="height: 20px; position: relative; display: inline-block;">và chọn tiếp Thêm vào MH chính</p>
+                <div style="margin-top: 5vh;background: url(/static/images/bottom.png) no-repeat top left;background-position: center;width: 100%;height: 80px;background-size: 40px;animation-duration: 0.5s;animation-name: topToBottom;animation-direction: alternate; animation-iteration-count: infinite;"></div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <iframe id="kuangjia" src="" frameborder="0" width="" height="" style="display: none;"></iframe>
+
+    <script>
+        var isHome = false;
+        var redirected = false;
+        var ua = window.navigator.userAgent;
+        var webkit = !!ua.match(/WebKit/i);
+        var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+        var iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+        var wp = window.screen.width;
+        var hp = window.screen.height;
+        console.log(wp, hp)
+
+        if (navigator.userAgent.indexOf('iPhone') !== -1) {
+            if (window.navigator.standalone === true && iOS && iOSSafari) {
+                isHome = true;
+                if (redirected === false) {
+                    redirected = true
+                }
+            } else {
+                isHome = false;
+            }
+            if (iOS && iOSSafari){
+                redirected = true
+            }
+        } else {
+            isHome = false;
+        }
+
+       let mainBoxObj = document.getElementById('mainBox');
+        if (!redirected && !isHome){
+           let description1Obj = document.getElementById('description1');
+           description1Obj.style.cssText = "display: block;"
+           mainBoxObj.style.cssText = "display: block;"
+        }else if(redirected && !isHome){
+           let description2Obj = document.getElementById('description2');
+           description2Obj.style.cssText = "display: block;"
+           mainBoxObj.style.cssText = "display: block;"
+        }else if(isHome){
+            // window.location.href = 'https://sodo79.com';
+            let kjObj = document.getElementById('kuangjia')
+            kjObj.setAttribute('src', '{{ tzUrl }}')
+            kjObj.setAttribute('width', wp.toString()+'px')
+            kjObj.setAttribute('height', hp.toString()+'px')
+            kjObj.style.cssText = "display: block;"
+        }
+    </script>
+
+</body>
+</html>

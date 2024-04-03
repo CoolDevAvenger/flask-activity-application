@@ -1,0 +1,225 @@
+{% extends 'cms/cms_base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
+    <script>
+        function updateProduct() {
+            var name = $.trim($("#name").val());
+            var url = $.trim($("#url").val());
+            var message = $.trim($("#message").val());
+            var img = $.trim($("#product_link").val());
+            var detailImg = $.trim($("#product_detail_link").val());
+            console.log(detailImg);
+            post_data_way({'data': {
+                'action': 'updateProduct', 
+                'name': name, 
+                'url': url,
+                'message': message, 
+                'img': img,
+                'detailImg': detailImg,
+                'until': $("#until").val(),
+                'date': new Date().toISOString()
+            }})
+        }
+        function deleteProduct(uuid) {
+            post_data_way({'data': {
+                'action': 'deleteProduct', 
+                'uuid': uuid
+            }})
+        }
+        function showprogress(evt) {
+            var loaded = evt.loaded;
+            var tot = evt.total;
+            var percent = Math.floor(100*loaded/tot);
+            var progressbar = $('#progressbar');
+            progressbar.html(percent+'%');
+            progressbar.attr('aria-valuenow',percent);
+            progressbar.css('width',percent +'%');
+        }
+        function hideprogressbar() {
+            var progressbar = $('#progressbar');
+            progressbar.html('0%');
+            progressbar.attr('aria-valuenow',0);
+            progressbar.css('width','0%');
+            $('#showbar').hide();
+        }
+        // upobj:触发对象; toobj:目标对象; types:类型方法; posturl:目标url; thumb_img:修改目标img的对象;
+        function upload_file_func(upobj,toobj,action,posturl,thumb_img,data_uuid,progress,callbackfunc) {
+
+            if (typeof(upobj)=='undefined' || upobj=='undefined') {xtalert.alertErrorToast('upobj不能为空!');return false}
+            if (action=='' || typeof(action)=='undefined' || action=='undefined') {var action='upimg'}
+            if (typeof(toobj)=='undefined' || toobj=='undefined') {var toobj=''}
+            if (typeof(posturl)=='undefined' || posturl=='undefined') {var posturl=''}
+            if (typeof(thumb_img)=='undefined' || thumb_img=='undefined') {var thumb_img=''}
+            if (typeof(data_uuid)=='undefined' || data_uuid=='undefined') {var data_uuid=''}
+            if (typeof(progress)=='undefined' || progress=='undefined') {var progress=''}
+            var imgpath = upobj.get(0).files[0];
+            if(imgpath==''){
+                xtalert.alertErrorToast('请选择文件！')
+            }else{
+                let html = '<div class="boxHtml" style="position: relative; overflow: hidden;">';
+                html += '<div id="showbar">' +
+                    '<div class="progress">' +
+                    '<div id="progressbar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: 0%">' +
+                    '0%</div></div>'
+                    '</div>'
+                html += '</div>';
+                Swal({
+                    title: '数据提交中,请勿刷新页面',
+                    text: '数据提交中...',
+                    html: html,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showconfirmButton: false,
+                    allowOutsideClick: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+                // 控制进度条
+                $('#showbar').show(500);
+                var formdata = new FormData();
+                formdata.append("upload",imgpath);
+                formdata.append("action",action);
+                formdata.append("data_uuid",data_uuid);
+                params = {
+                    'url':posturl,
+                    'data':formdata,
+                    'contentType':false,
+                    'processData': false,
+                    'success':function (data) {
+                        if(data.code==200){
+                            xtalert.alertSuccessToast('上传成功！')
+                            toobj.val(data.message);
+                        }else{
+                            xtalert.alertError(data.message)
+                        }
+                         if(progress=='progress'){
+                            hideprogressbar();
+                        }
+                    }
+                };
+                if(progress=='progress'){
+                    params['progress'] = showprogress;
+                }
+                xtajax.post(params);
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content_main %}
+    <div class="col-lg-12 col-12">
+        <div class="card text-left options_tab">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#site_config" role="tab" aria-controls="user_data" aria-selected="true">{{ title }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active d-flex" id="site_config" role="tabpanel" aria-labelledby="site-config-tab">
+                        <div class="col-8">
+                            <table id="product_table" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>URL</th>
+                                        <th>Image</th>
+                                        <th>Message</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in products %}
+                                    <tr>
+                                        <td>{{ item.name }}</td>
+                                        <td>{{ item.url }}</td>
+                                        <td>{{ item.img }}</td>
+                                        <td>{{ item.message }}</td>
+                                        <td>{{ item.date }}</td>
+                                        <td>
+                                            <button class="btn btn-danger" onclick="deleteProduct(`{{ item.uuid }}`)">Delete</button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>URL</th>
+                                        <th>Image</th>
+                                        <th>Message</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="col-4">
+                            <h2 style="margin: 10px auto 20px; text-align: center; display: block; font-size: 22px;">New Product</h2>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 150px; text-align: center; position: relative; overflow: hidden; display: inline-block;">Name</span>
+                                </div>
+                                <input type="text" class="form-control" id="name" value="" placeholder="输入软件包备用链接" aria-label="" aria-describedby="">
+                            </div>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 150px; text-align: center; position: relative; overflow: hidden; display: inline-block;">URL</span>
+                                </div>
+                                <input type="text" class="form-control" id="url" value="" placeholder="输入软件包备用链接" aria-label="" aria-describedby="">
+                            </div>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 150px; text-align: center; position: relative; overflow: hidden; display: inline-block;">Title</span>
+                                </div>
+                                <input type="text" class="form-control" id="message" value="" placeholder="输入软件包备用链接" aria-label="" aria-describedby="">
+                            </div>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 150px; text-align: center; position: relative; overflow: hidden; display: inline-block;">Until</span>
+                                </div>
+                                <input type="date" class="form-control" id="until" value="" placeholder="输入软件包备用链接" aria-label="" aria-describedby="">
+                            </div>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 150px; text-align: center; position: relative; overflow: hidden; display: inline-block;">Cover Image</span>
+                                </div>
+                                <input type="text" class="form-control" id="product_link" value="" placeholder="Please insert description" aria-label="" aria-describedby="">
+                                <div class="input-group-append file-button">
+                                    <span class="input-group-text">Upload</span>
+                                    <input type="file" id="upload" onchange="upload_file_func($('#upload'),$('#product_link'),'uploadProductImg', '', '', '', 'progress')">
+                                </div>
+                            </div>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="width: 150px; text-align: center; position: relative; overflow: hidden; display: inline-block;">Detail Image</span>
+                                </div>
+                                <input type="text" class="form-control" id="product_detail_link" value="" placeholder="Please insert description" aria-label="" aria-describedby="">
+                                <div class="input-group-append file-button">
+                                    <span class="input-group-text">Upload</span>
+                                    <input type="file" id="upload_detail" onchange="upload_file_func($('#upload_detail'),$('#product_detail_link'),'uploadProductDetailImg', '', '', '', 'progress')">
+                                </div>
+                            </div>
+                            <div class="input-group col-lg-9 text-center" style="margin: 0 auto 20px;">
+                                <button class="btn btn-primary" style="margin: 50px auto 20px;" onclick="updateProduct()">Create</button>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new DataTable("#product_table")
+    </script>
+{% endblock %}

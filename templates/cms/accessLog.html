@@ -1,0 +1,195 @@
+{% extends 'cms/cms_base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.bootstrap5.css"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.bootstrap5.js"></script>
+    <script>
+        function post_data() {
+            var ios_package = $.trim($("#ios_package").val());
+            var android_link = $.trim($("#android_link").val());
+            var spare_link = $.trim($("#spare_link").val());
+            var ios_version = $.trim($("#ios_version").val());
+            var android_version = $.trim($("#android_version").val());
+
+            var white_ips = $.trim($("#white_ips").val());
+            var ipa_package = $.trim($("#ipa_package").val());
+            var standby_link = $.trim($("#standby_link").val());
+            post_data_way({'data': {
+                'action': 'updateConfig', 'ios_package': ios_package, 'android_link': android_link, 'spare_link': spare_link,
+                'ios_version': ios_version, 'android_version': android_version, 'white_ips': white_ips, 'ipa_package':ipa_package, 'standby_link': standby_link
+            }})
+        }
+        function showprogress(evt) {
+            var loaded = evt.loaded;
+            var tot = evt.total;
+            var percent = Math.floor(100*loaded/tot);
+            var progressbar = $('#progressbar');
+            progressbar.html(percent+'%');
+            progressbar.attr('aria-valuenow',percent);
+            progressbar.css('width',percent +'%');
+        }
+        function hideprogressbar() {
+            var progressbar = $('#progressbar');
+            progressbar.html('0%');
+            progressbar.attr('aria-valuenow',0);
+            progressbar.css('width','0%');
+            $('#showbar').hide();
+        }
+        // upobj:触发对象; toobj:目标对象; types:类型方法; posturl:目标url; thumb_img:修改目标img的对象;
+        function upload_file_func(upobj,toobj,action,posturl,thumb_img,data_uuid,progress,callbackfunc) {
+
+            if (typeof(upobj)=='undefined' || upobj=='undefined') {xtalert.alertErrorToast('upobj不能为空!');return false}
+            if (action=='' || typeof(action)=='undefined' || action=='undefined') {var action='upimg'}
+            if (typeof(toobj)=='undefined' || toobj=='undefined') {var toobj=''}
+            if (typeof(posturl)=='undefined' || posturl=='undefined') {var posturl=''}
+            if (typeof(thumb_img)=='undefined' || thumb_img=='undefined') {var thumb_img=''}
+            if (typeof(data_uuid)=='undefined' || data_uuid=='undefined') {var data_uuid=''}
+            if (typeof(progress)=='undefined' || progress=='undefined') {var progress=''}
+            var imgpath = upobj.get(0).files[0];
+            if(imgpath==''){
+                xtalert.alertErrorToast('请选择文件！')
+            }else{
+                let html = '<div class="boxHtml" style="position: relative; overflow: hidden;">';
+                html += '<div id="showbar">' +
+                    '<div class="progress">' +
+                    '<div id="progressbar" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: 0%">' +
+                    '0%</div></div>'
+                    '</div>'
+                html += '</div>';
+                Swal({
+                    title: '数据提交中,请勿刷新页面',
+                    text: '数据提交中...',
+                    html: html,
+                    showCloseButton: false,
+                    showCancelButton: false,
+                    showconfirmButton: false,
+                    allowOutsideClick: false,
+                    onBeforeOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+                // 控制进度条
+                $('#showbar').show(500);
+                var formdata = new FormData();
+                formdata.append("upload",imgpath);
+                formdata.append("action",action);
+                formdata.append("data_uuid",data_uuid);
+                params = {
+                    'url':posturl,
+                    'data':formdata,
+                    'contentType':false,
+                    'processData': false,
+                    'success':function (data) {
+                        if(data.code==200){
+                            xtalert.alertSuccessToast('上传成功！')
+                            toobj.val(data.message);
+                        }else{
+                            xtalert.alertError(data.message)
+                        }
+                         if(progress=='progress'){
+                            hideprogressbar();
+                        }
+                    }
+                };
+                if(progress=='progress'){
+                    params['progress'] = showprogress;
+                }
+                xtajax.post(params);
+            }
+        }
+        function checkIpaSignature(ipa_path) {
+            if (!ipa_path){return xtalert.alertError('请先上传ipa!')}
+            Swal({
+                title: '',
+                text: '检测中...',
+                showCloseButton: false,
+                showCancelButton: false,
+                showconfirmButton: false,
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+            xtajax.post({
+                'data': {'action': 'check_ipa_signature', 'ipa_path': ipa_path},
+                'success': function (data) {
+                    if (data.code === 200){
+                        return xtalert.alertSuccess('检测结果：' + data.message);
+                    }else {
+                        return xtalert.alertError(data.message);
+                    }
+                }
+            })
+        }
+
+    </script>
+{% endblock %}
+
+{% block content_main %}
+    <div class="col-lg-12 col-12">
+        <div class="card text-left options_tab">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#site_config" role="tab" aria-controls="user_data" aria-selected="true">{{ title }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="site_config" role="tabpanel" aria-labelledby="site-config-tab">
+
+                        <table id="access_log" class="table table-striped" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>IP</th>
+                                    <th>Activity</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Device</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in logs %}
+                                <tr>
+                                    <td>{{ item.account }}</td>
+                                    <td>{{ item.ip_address }}</td>
+                                    <td>{{ item.activity }}</td>
+                                    <td>
+                                        {% if item.status == "pending" %}
+                                            <span class="alert-success">{{ item.status }}</span>
+                                        {% else %}
+                                            <span class="alert-danger">{{ item.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ item.time }}</td>
+                                    <td>{{ item.device_type }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>IP</th>
+                                    <th>Activity</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Device</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        new DataTable('#access_log');
+    </script>
+{% endblock %}

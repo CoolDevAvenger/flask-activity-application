@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ac8236ff-869b-46de-ae47-85248d13c291" name="越南-服务器">
+        <fileTransfer rootFolder="/www/project_app" accessType="SFTP" host="103.197.185.85" port="4433" sshConfigId="8f5b9e39-3777-4fd5-a8d2-61864167e34c" sshConfig="root@103.197.185.85:4433 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="30000" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="f13b203f-33d7-4218-9501-08f0d0eb6cba" name="计划网3">
+        <fileTransfer rootFolder="/www/project_app" accessType="SFTP" host="23.248.192.114" port="47520" sshConfigId="53a5f153-64f7-4112-82f8-445b7bdd2341" sshConfig="root@23.248.192.114:47520 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

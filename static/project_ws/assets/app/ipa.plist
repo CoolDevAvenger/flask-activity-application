@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+  <dict>
+      <key>items</key>
+      <array>
+        <dict>
+           <key>assets</key>
+           <array>
+             <dict>
+               <key>kind</key>
+               <string>software-package</string>
+               <key>url</key>
+               <string>https://ws905.com/assets/app/TTcueD7AphPvw2XCVVBU4c.ipa</string>
+             </dict>
+             <dict>
+               <key>kind</key>
+               <string>display-image</string>
+               <key>needs-shine</key>
+               <integer>0</integer>
+               <key>url</key>
+               <string>https://ws905.com/assets/images/logo.png</string>
+             </dict>
+             <dict>
+               <key>kind</key>
+               <string>full-size-image</string>
+               <key>needs-shine</key>
+               <true/>
+               <key>url</key>
+               <string>https://ws905.com/assets/images/logo.png</string>
+             </dict>
+           </array>
+           <key>metadata</key>
+           <dict>
+             <key>bundle-identifier</key>
+             <string>com.fuzhou.meiquan.vnsxv1</string>
+             <key>bundle-version</key>
+             <string>2.9.52</string>
+             <key>kind</key>
+             <string>software</string>
+             <key>title</key>
+             <string>万盛集团</string>
+           </dict>
+        </dict>
+      </array>
+  </dict>
+</plist>        
+        

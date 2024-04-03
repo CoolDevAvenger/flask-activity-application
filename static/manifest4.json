@@ -1,0 +1,25 @@
+{
+  "name": "TK88",
+  "short_name": "TK88",
+  "start_url": "/ios",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://tk888.app/static/images/tk888_ios301_1.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://tk888.app/static/images/tk888_ios301_1.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://tk888.app/static/images/tk888_ios301_1.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

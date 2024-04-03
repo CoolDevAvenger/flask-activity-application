@@ -1,0 +1,25 @@
+{
+  "name": "万盛集团",
+  "short_name": "万盛集团",
+  "start_url": "/ios",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://ws905.com/assets/images/logo.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://ws905.com/assets/images/logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://ws905.com/assets/images/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

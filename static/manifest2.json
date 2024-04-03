@@ -1,0 +1,25 @@
+{
+  "name": "TK88",
+  "short_name": "TK88",
+  "start_url": "/56666513",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://sodo66.app/static/images/tk88_ios_logo.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://sodo66.app/static/images/tk88_ios_logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://sodo66.app/static/images/tk88_ios_logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

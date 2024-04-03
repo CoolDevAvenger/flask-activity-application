@@ -1,0 +1,344 @@
+html {
+    color: #000;
+    background: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: STHeiti,Arial,"Microsoft Yahei","Hiragino Sans GB","Simsun,sans-self"
+}
+
+body {
+    height: auto;
+    background: #12151b;
+    max-width: 640px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: STHeiti,Arial,"Microsoft Yahei","Hiragino Sans GB","Simsun,sans-self";
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 99px;
+    background: #111111;
+    padding: 0 5px;
+    border-bottom: 1px solid #f2d11d;
+}
+
+.newbox {
+    background: #1f252f;
+    height: 52px;
+    width: 100%;
+    z-index: 99;
+}
+
+.newin {
+    height: 52px;
+    padding-left: 127px;
+    padding-right: 10px;
+    background: url('/static/dashboard/images/mb/newtl.png') no-repeat 10px center;
+}
+
+.lunleft {
+    position: relative;
+    overflow: hidden;
+    height: 52px;
+    color: white;
+    font-family: "Microsoft Yahei", "Hiragino Sans GB", "Simsun,sans-self";
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 25px 20px;
+    border-top: none;
+}
+
+.list-item li {
+    cursor: pointer;
+    margin-bottom: 10px;
+    position: relative;
+    transition: all ease 0.5s;
+    width: 100%;
+    padding-bottom: 0;
+}
+
+.list-item li:hover {
+    transform: translateY(-5px);
+}
+
+.asimg {
+    display: block;
+}
+
+.list-item .asimg {
+    width: 100%;
+}
+
+@keyframes marquee {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+marquee {
+    display: block;
+    width: 100%; /* Adjust as needed */
+    overflow: hidden;
+    white-space: nowrap;
+    animation: marquee 0s linear infinite;
+}
+
+.nav {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 88px;
+    background: #1a1f27;
+    z-index: 88;
+    display: flex;
+}
+
+.nav a {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    height: 88px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+}
+
+.nav a:nth-child(even) {
+    background: #1f252f;
+}
+
+.tishibx {
+    text-align: center;
+    padding-top: 12px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.tishi {
+    color: white;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    font-family: "Microsoft Yahei", "Hiragino Sans GB", "Simsun,sans-self";
+}
+
+.footer {
+    margin-top: 40px;
+}
+
+.fimg {
+    padding-top: 22px;
+    text-align: center;
+}
+
+.cop {
+    color: #ffe30c;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+#product_modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+
+.modal-content {
+    width: 572px;
+    min-height: 100px;
+    background: rgb(18, 21, 27);
+    border-radius: 19px;
+    position: relative;
+    margin: 0px auto;
+    top: 20%;
+    border: 2px solid rgb(232, 208, 107);
+    padding: 27px 45px;
+    box-sizing: border-box;
+}
+
+.close {
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 49px;
+    height: 49px;
+    background: url('/static/dashboard/images/mb/close.png') no-repeat center top;
+    cursor: pointer;
+}
+
+.logox {
+    text-align:center;
+    padding-top: 58px;
+    padding-bottom:18px;
+}
+
+.tlbox {
+    text-align:center;
+    font-size: 28px;
+    color: #ebd599;
+    background: url("/static/dashboard/images/mb/xian.png") no-repeat center center;
+    border-bottom: 1px solid #35373c;
+    line-height: 60px;
+    margin-bottom:23px;
+}
+ 
+.foemzuo {
+    width: 100px;
+    text-align: right;
+    line-height: 33px;
+    padding-right: 10px;
+    color: #f9efa8;
+    float: left;
+    font-size: 20px;
+}
+
+.layerbox{
+    position:fixed;
+    left: 0px;
+    top: 0px;
+    width:100%;
+    height:100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling : touch;
+    -moz-overflow-scrolling : touch;
+    -ms-overflow-scrolling : touch;
+    -o-overflow-scrolling : touch;
+    background:rgba(0,0,0,0.6);
+    display:none;
+}
+
+.layerconts{
+    width: 572px;
+    background: #12151b;
+    border-radius: 19px;
+    position: relative;
+    margin: 0 auto;
+    top: 5%;
+    border: 2px solid #e8d06b;
+    padding: 27px 45px;
+    box-sizing: border-box;
+}
+
+.fontyou{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.taninpt{
+    width: 70%;
+    height: 61px;
+    background: #fff;
+    border: 1px solid #fff;
+    text-indent: 4px;
+    font-size: 20px;
+    border-radius: 9px;
+    text-indent: 10px;
+}
+
+.tanbtn1{
+    background-image: linear-gradient(106deg, #f0bb25, #fef879 53%, #f0bb25);
+    margin-top: 10px;
+    text-align: center;
+    line-height: 60px;
+    color: #111;
+    font-size: 25px;
+    display: inline-block;
+    border-radius: 7px / 8px 8px 7px 7px;
+    background-color: #fedc62;
+    width: 100%;
+}
+
+.layerbox-msg {
+    text-align: center;
+    font-size: 28px;
+    color: rgb(191, 44, 0);
+    padding: 30px 0px;
+    line-height: 60px;
+}
+
+.h30 {
+    height: 30px;
+}
+
+.subcont {
+    width: 600px;
+    margin: 0 auto;
+    margin-top: 22px;
+}
+
+.subtalt {
+    border-bottom: 1px solid #262d39;
+    padding: 9px 0px;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.sosaotp {
+    font-size: 30px;
+    color: #fff;
+    line-height: 33px;
+}
+
+.backbtn {
+    width: 137px;
+    height: 40px;
+    background: url("/static/dashboard/images/backbtn.png") no-repeat center top;
+    text-indent: -9999em;
+    font-size: 26px;
+    font-weight: bold;
+    border-radius: 30px;
+    color: #111;
+    line-height: 47px;
+}
+
+.dwnnz {
+    overflow: auto;
+}

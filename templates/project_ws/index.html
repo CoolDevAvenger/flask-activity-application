@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>APP 下载</title>
+    <meta name="applicable-device" content="mobile">
+    <link rel="icon" href="/assets/images/logo.png">
+    <link href="/assets/css/style1.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="UTF-8" src="https://web.cdn.openinstall.io/openinstall.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="top" class="top" style="display: none;"><img src="/assets/images/logo.png" width="100%"></div>
+        <div class="cont">
+            <h1 id="name">万盛集团</h1>
+            <div class="logo"><img id="icon_img" src="/assets/images/logo.png" width="100%"></div>
+            <a id="download-btn" href="itms-services://?action=download-manifest&amp;url=https://www.ws871.com/native/platform/sxlb/cp.plist" class="download">下载安装</a>
+            <div class="verinfo" id="verinfo" style="display: block">版本号：2.9.22</div>
+            <div id="pc" style="display: none">
+                <h3>贴心提醒：微信跟支付宝扫码容易被屏蔽，强烈推荐您使用手机自带相机或其他扫码软件扫描二维码下载APP</h3>
+                <div class="qrcode" id="qrcode" title="https://www.ws871.com/">
+                    <canvas width="200" height="200" style="display: none;"></canvas>
+                    <img src="data:image/png;base64,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" style="display: none;" alt="">
+                </div>
+            </div>
+            <div class="bz" id="ios_tip" style="display: none;">
+                <h3 style="text-align: center;margin-top: 5px;">苹果手机下载APP需要卸载旧的APP 否则会安装不了</h3>
+                <div class="bz_title">苹果IOS系统用户必看</div>
+                <p>由于iOS增强了企业版开发者证书的验证规则，因此iOS需要用户手动信任企业证书，才能正常使用。
+                    如果您知道如何操作,请<a class="trust-link" id="download-btn2" href="itms-services://?action=download-manifest&amp;url=https://www.ws871.com/native/platform/sxlb/cp.plist">点击此处</a>快速跳转到设备管理设置界面, 并选择信任对应证书
+                </p>
+                <br>
+                <p>默认情况下，打开下载app是这样的情况</p>
+                <div class="bz_img"><img src="/assets/ws/1.jpg" width="100%"></div>
+                <p><i>1</i>点开App,弹出未受信任的开发者，记住弹框中冒号后面的大写字母。关闭，进入设置</p>
+                <div class="bz_img"><img src="/assets/ws/01.jpg" width="100%"></div>
+                <p><i>2</i>依次打开：设置 &gt;通用 &gt;</p>
+                <div class="bz_img"><img src="/assets/ws/2.jpg" width="100%"></div>
+                <p><i>3</i>进入：设备管理 <a class="trust-link" href="setting.mobileprovision">点此快速进入</a></p>
+                <div class="bz_img"><img src="/assets/ws/3.jpg" width="100%"></div>
+                <p><i>4</i>找到所对应的企业级应用（就是打开App,冒号后面的大写字母）</p>
+                <div class="bz_img"><img src="/assets/ws/4.jpg" width="100%"></div>
+                <p><i>5</i>选择信任，进入</p>
+                <div class="bz_img"><img src="/assets/ws/5.jpg" width="100%"></div>
+                <p><i>6</i>点击弹出的弹框中的"信任"。大功告成，可以愉快的进入App了！</p>
+                <div class="bz_img"><img src="/assets/ws/6.jpg" width="100%"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    function getCookie(name) {
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+    }
+    var $id = function(id) { return document.getElementById(id) }
+    var isTouchDevice = function() { return 'ontouchstart' in window || 'onmsgesturechange' in window; }
+    window.onload = function() {
+        var btn = $id("download-btn");
+        var btn2 = $id("download-btn2");
+        var el_h1 = $id('name')
+        var el_icon = $id('icon_img')
+        var el_verinfo = $id('verinfo')
+        var ua = navigator.userAgent.toLowerCase();
+        var bIsIpad = ua.match(/ipad/i) == "ipad";
+        var bIsIpod = ua.match(/ipod/i) == "ipod";
+        var bIsIphoneOs = ua.match(/iphone os/i) == "iphone os";
+        var bIsIphone = ua.match(/iphone/i) == "iphone"; // 手机版firefox只有'iphone'
+        var bIsAndroid = ua.match(/android/i) == "android";
+        var bIsWM = ua.match(/windows mobile/i) == "windows mobile";
+
+        var params = (function() {
+            var p = {}
+            location.search.substring(1).split('&').forEach(function(pair) {
+                var k_v = pair.split('=')
+                p[k_v[0]] = k_v[1]
+            })
+            return p
+        })()
+
+        if (!params.platform) {
+            params.platform = getCookie('platform')
+        }
+
+        el_icon.setAttribute('src', '/assets/images/logo.png')
+
+        var dl_url = ''
+        if (bIsIpod || bIsIpad || bIsIphoneOs || bIsIphone) {
+            var dl_url = "{{ ios_package }}";
+            $id('ios_tip').style.display = 'block'
+        } else {
+            var dl_url = "{{ configData.android_link or '' }}"
+        }
+
+        btn.setAttribute("href", dl_url)
+        btn2.setAttribute("href", dl_url)
+
+
+        if (navigator.userAgent.indexOf('MicroMessenger') <= -1) {
+            $id('top').style.display = "none";
+        } else {
+            if (bIsIpod || bIsIpad || bIsIphoneOs) {
+                //location.href = 'QQ 应用宝链接'
+            }
+        }
+
+        if (!isTouchDevice()) {
+            $id('pc').style.display = 'block';
+        }
+
+        if (bIsAndroid){
+            el_verinfo.innerHTML = '版本号：' + '{{ configData.android_version or '1.0.0' }}';
+        }else{
+            el_verinfo.innerHTML = '版本号：' + '{{ configData.ios_version or '1.0.0' }}';
+        }
+
+        // 透过 Android/iOS设备档 取版号
+        var versionUrl = '';
+        versionUrl = '/native/platform/' + params.platform + '/';
+        versionUrl += `version-${bIsAndroid ? 'Android' : 'iOS'}.json`;
+        versionUrl += '?v=' + new Date().getTime();
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', versionUrl);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var cpInfo = JSON.parse(xhr.responseText);
+                if (cpInfo.name || cpInfo.name === '') {
+                    el_h1.innerHTML = cpInfo.name
+                }
+                el_verinfo.innerHTML = '版本号：' + (cpInfo.version || '').split('_').pop();
+                appKey = cpInfo.appkey
+
+                if (appKey && (params.invite || params.att)) {
+                    getAppByUrlKey()
+                }else{
+                    if (params.download) {
+                        location.href = dl_url
+                    }
+                }
+            }else{
+                setTimeout(function(){
+                    xhr.send();
+                },3000)
+            }
+        };
+        xhr.send();
+
+        function getAppByUrlKey() {
+            console.log(params)
+            new OpenInstall({
+                appKey: appKey,
+                onready: function() {
+                    var m = this;
+                    btn.style.visibility = "visible";
+                    btn2.style.visibility = "visible";
+                    btn.setAttribute("href", 'javascript:;')
+                    btn2.setAttribute("href", 'javascript:;')
+
+                    /*在app已安装的情况尝试拉起app*/
+                    m.schemeWakeup();
+                    /*用户点击某个按钮时(假定按钮id为downloadButton)，安装app*/
+                    btn.onclick = function() {
+                        m.wakeupOrInstall();
+                        return false;
+                    }
+                    btn2.onclick = function() {
+                        m.wakeupOrInstall();
+                        return false;
+                    }
+
+                    if (params.download) {
+                        btn.onclick()
+                    }
+                }
+            }, params);
+        }
+    }
+    </script>
+    <script src="/assets/assets/qrcode.min.js"></script>
+    <script>
+    var qrcode = new QRCode($id('qrcode'), {
+        text: location.href,
+        width: 200,
+        height: 200,
+        colorDark: "#333333",
+        colorLight: "#ffffff"
+    });
+    </script>
+
+
+</body>
+</html>

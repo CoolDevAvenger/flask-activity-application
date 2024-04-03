@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>{{ title }}</title>
+    <link rel="icon" href="/static/common/images/logo.png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/bootstrap/font/bootstrap-icons.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='common/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/bootstrap/js/popper.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/bootstrap/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/sweetalert2/sweetalert2.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='common/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/sweetalert2/promise.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/sweetalert2/xtalert.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/daterangepicker/daterangepicker.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='common/daterangepicker/moment.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/daterangepicker/daterangepicker.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/daterangepicker/pickerDate.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/xtajax.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/js/upload.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/js/common.js') }}"></script>
+    <style>
+        html, body{ font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; font-size: 100%; color: #333;
+            background: #f6f6f6;
+        }
+        html, body{ font-size: 14px;}
+        img, a:link, a:visited, a:hover ,a:active{text-decoration: none; outline: none;}
+        .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {outline: none; border-color: transparent;}
+        /* 禁止换行 */
+        .ban-newline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        /* 强制换行 */
+        .require-newline{word-break: break-all;word-wrap: break-word;white-space: pre-wrap;}
+        /* 禁止选中 */
+        .no-touch {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;-o-user-select: none;user-select: none;}
+        /* 文件上传按钮美化 */
+        .file-button {position: relative;display: inline-block;overflow: hidden;}
+        .file-button input{position:absolute;right: 0;top: 0;bottom: 0;opacity: 0;-ms-filter: 'alpha(opacity=0)';cursor: pointer;}
+        ul, li, a{margin: 0; padding: 0; text-decoration: none}
+        ul, li, ul >li{list-style: none}
+        a:hover{ text-decoration: none }
+        .form-control {border-color: #CCD1D9; box-shadow: none; border-radius: 4px; color: #434A54;}
+        .to_cursor{cursor: pointer;}
+        .noradius{ border-radius: 0;}
+        .btn-default{
+            background-color: #fff;
+            border-color: #dbdbdb;
+            color: #303030;
+            white-space: nowrap;
+        }
+        .btn-default:hover{
+            background-color: #f0f0f0;
+            border-color: #e3e3e3;
+            color: #303030;
+        }
+        .background-white{background: #ffffff}
+        .table td{ padding: .68rem; }
+        .btn-xs{ padding: .08rem .4rem; font-size: .78rem; line-height: 1.5; border-radius: .2rem;}
+        .box-shadow{box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08)}
+        .card{ /*box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);*/ box-shadow: 0 0 2px 0 rgba(82, 63, 105, 0.05);}
+        .card-header{ padding: 13px 20px;}
+        .card-subtitle{display: block; width: 100%; padding: 10px 20px; border-top: 1px solid rgba(0,0,0,.125); border-bottom: 1px solid rgba(0,0,0,.125); background: #f0f1f2; font-size: 16px; font-weight: bolder;}
+        .red {color: red}
+        ::placeholder {color: #747f8a !important;font-size: 13px;opacity: .5 !important;}
+        .card-border-bottom{ border-bottom: 1px solid rgba(0,0,0,.125)}
+
+        /* 选项卡 */
+        .options_tab { border: none;}
+        .options_tab .card-header a{ color: rgba(0,0,0,.85);}
+        .options_tab .card-header{ border: none; padding: 0 20px; background: #FFFFFF; position: relative; overflow: hidden; box-sizing: border-box;}
+        .options_tab .card-header .nav-pills{ border-bottom: 1px solid rgba(0,0,0,.125); margin: 0;}
+        .options_tab .card-header .nav-pills .nav-item{ padding: 10px 0 7px; position: relative; overflow: hidden;}
+        .options_tab .card-header .nav-item .nav-link.active{ color: #007bff; background: none;}
+        .options_tab .card-header .nav-item .nav-link.active::after{ content: ""; position: absolute; width:calc(100% - 30px); height: 2px; background: #007bff; bottom: 0; left: 15px; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease;}
+
+        /* 头部 */
+        #header{ width: auto; height: 62px; box-shadow: 0 2px 4px rgba(41,48,66,.1); background-color: #ffffff; position: fixed; top: 0; left: 210px; right: 0; padding: 0 18px; box-sizing: border-box; z-index: 999; font-size: 15px;}
+        #header .dropdown-menu { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important; top: 60px; margin-top: 0; padding: .3rem 0; right: -10px; min-width: 100px; width: auto; font-size: 14px; border: none;}
+        #header .dropdown-menu a{ padding: 12px;}
+        #header .dropdown-menu svg{ display: inline-block; margin-right: 5px; vertical-align: -.1em;}
+        .navbar-brand i{ font-size: 1.5rem;}
+        .navbar-nav li.nav-item{ margin: 0 10px; }
+        .navbar-nav li.nav-item a.nav-link{ color: #333333;}
+        .navbar-nav li.nav-item a.nav-link svg{ display: inline-block; margin-right: 5px; vertical-align: -.1em;}
+        .dropdown-box a.nav-link{ line-height: 36px}
+        .dropdown-box a.nav-link .avatar{ margin-top: -15px; margin-bottom: -15px; width: 40px; height: 40px; margin-right: .25rem !important; border-radius: 50% !important;}
+
+        #swal2-title{ margin-bottom: 25px}
+        #sidebar{ width: 210px; position: fixed; top: 0; left: 0; bottom: 0;  background-color: #1D86F3; z-index: 999; font-size: 15px; overflow: hidden; box-sizing: border-box; background: #1d86f3 url('/static/keFu/images/xiaZai.png') no-repeat 100% 100%}
+        #sidebar .brand-logo{width: 100%; height: 62px; line-height: 65px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.15); position: relative; overflow: hidden;}
+        #sidebar .brand-logo img{width: 35px; margin-right: 5px;}
+        #sidebar .brand-logo .logo-text {margin: 0; padding: 0; color: #fff; font-size: 16px; font-weight: 600; display: inline-block; position: relative; top: 3px; letter-spacing: 2px; text-align: center; line-height: 50px;}
+        #sidebar .nav-box{ position: relative; overflow: hidden auto; width: 100%; height: 100%; padding-top: 10px;}
+        #sidebar .list-group-item{ background-color: #1D86F3; color: #FFFFFF; border-color: #1D86F3}
+        #sidebar .list-group-item:hover{ color: #FFFFFF; background-color: #007bff;}
+        #sidebar a.active{z-index: 2;color: #fff;background-color: #007bff;border-color: #007bff;}
+
+        /* 内容 */
+        #content_box{width: auto;padding: 15px;margin-left: 210px;margin-top: 62px;margin-bottom: 70px; box-sizing: border-box; position: relative; overflow: hidden;}
+        #content_box .ol_box{box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); padding: 12px; margin-bottom: 15px; background-color: #fff}
+        .no_data{width: 100%; height: 390px; padding-top: 100px; text-align: center; background: white; position: relative; top: -14px;}
+    </style>
+    <script>
+        $(function () {
+            // 日期选择器
+            $.picker_YY_HH_DD_HH_MM_SS('.pickerdate');
+
+            // 年月日选择器
+            $.single_YY_MM_DD('.selectDateYMD')
+
+            // 当前菜单定位
+            var a_tags = $("#sidebar").find("a");
+            a_tags.each(function(index, data){
+                if (window.location.pathname==$(this).attr('href')){
+                    $(this).addClass('active');
+                    $(this).siblings().removeClass("active");
+                }
+            });
+        })
+    </script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    <header id="header" class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#" >
+            <svg viewBox="64 64 896 896" focusable="false" fill="currentColor" aria-hidden="true" style="width: 1.1em; height: 1.1em; vertical-align: -3px;"><path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 000 13.8z"></path></svg>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link d-none d-sm-inline-block" href="#">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="mail" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M928 160H96c-17.7 0-32 14.3-32 32v640c0 17.7 14.3 32 32 32h832c17.7 0 32-14.3 32-32V192c0-17.7-14.3-32-32-32zm-40 110.8V792H136V270.8l-27.6-21.5 39.3-50.5 42.8 33.3h643.1l42.8-33.3 39.3 50.5-27.7 21.5zM833.6 232L512 482 190.4 232l-42.8-33.3-39.3 50.5 27.6 21.5 341.6 265.6a55.99 55.99 0 0068.7 0L888 270.8l27.6-21.5-39.3-50.5-42.7 33.2z"></path></svg>
+                        <span>信息</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-none d-sm-inline-block" href="#">
+                        <svg viewBox="64 64 896 896" focusable="false" data-icon="bell" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M816 768h-24V428c0-141.1-104.3-257.7-240-277.1V112c0-22.1-17.9-40-40-40s-40 17.9-40 40v38.9c-135.7 19.4-240 136-240 277.1v340h-24c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h216c0 61.8 50.2 112 112 112s112-50.2 112-112h216c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM512 888c-26.5 0-48-21.5-48-48h96c0 26.5-21.5 48-48 48zM304 768V428c0-55.6 21.6-107.8 60.9-147.1S456.4 220 512 220c55.6 0 107.8 21.6 147.1 60.9S720 372.4 720 428v340H304z"></path></svg>
+                        <span>提示</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="my-2 my-lg-0">
+                <ul class="navbar-nav navbar-align dropdown-box">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" data-toggle="dropdown">
+                            <img src="/static/common/images/user.png" class="avatar img-fluid rounded-circle mr-1" alt="Chris Wood">
+                            <span style="color: #8e8f95; font-size: 14px;">欢迎，{{ current_admin_user.username }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{{ url_for('admin.cms_login_out') }}">
+                                <span style="color: red;">
+                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="logout" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M868 732h-70.3c-4.8 0-9.3 2.1-12.3 5.8-7 8.5-14.5 16.7-22.4 24.5a353.84 353.84 0 01-112.7 75.9A352.8 352.8 0 01512.4 866c-47.9 0-94.3-9.4-137.9-27.8a353.84 353.84 0 01-112.7-75.9 353.28 353.28 0 01-76-112.5C167.3 606.2 158 559.9 158 512s9.4-94.2 27.8-137.8c17.8-42.1 43.4-80 76-112.5s70.5-58.1 112.7-75.9c43.6-18.4 90-27.8 137.9-27.8 47.9 0 94.3 9.3 137.9 27.8 42.2 17.8 80.1 43.4 112.7 75.9 7.9 7.9 15.3 16.1 22.4 24.5 3 3.7 7.6 5.8 12.3 5.8H868c6.3 0 10.2-7 6.7-12.3C798 160.5 663.8 81.6 511.3 82 271.7 82.6 79.6 277.1 82 516.4 84.4 751.9 276.2 942 512.4 942c152.1 0 285.7-78.8 362.3-197.7 3.4-5.3-.4-12.3-6.7-12.3zm88.9-226.3L815 393.7c-5.3-4.2-13-.4-13 6.3v76H488c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h314v76c0 6.7 7.8 10.5 13 6.3l141.9-112a8 8 0 000-12.6z"></path></svg>
+                                    退出登录
+                                </span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="brand-logo">
+            <img src="/static/common/images/CMS_LOG_W.png" alt="login-icon">
+            <h2 class="logo-text">工具集系统</h2>
+        </div>
+        <div class="nav-box">
+            <div class="list-group">
+
+                <a class="list-group-item noradius" href="{{ url_for('admin.system') }}" datatype="second-menu">
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="setting" fill="currentColor" aria-hidden="true" style="width: 16px; height: 16px; margin-right: 7px; vertical-align: -.15em;"><path d="M924.8 625.7l-65.5-56c3.1-19 4.7-38.4 4.7-57.8s-1.6-38.8-4.7-57.8l65.5-56a32.03 32.03 0 009.3-35.2l-.9-2.6a443.74 443.74 0 00-79.7-137.9l-1.8-2.1a32.12 32.12 0 00-35.1-9.5l-81.3 28.9c-30-24.6-63.5-44-99.7-57.6l-15.7-85a32.05 32.05 0 00-25.8-25.7l-2.7-.5c-52.1-9.4-106.9-9.4-159 0l-2.7.5a32.05 32.05 0 00-25.8 25.7l-15.8 85.4a351.86 351.86 0 00-99 57.4l-81.9-29.1a32 32 0 00-35.1 9.5l-1.8 2.1a446.02 446.02 0 00-79.7 137.9l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.3 56.6c-3.1 18.8-4.6 38-4.6 57.1 0 19.2 1.5 38.4 4.6 57.1L99 625.5a32.03 32.03 0 00-9.3 35.2l.9 2.6c18.1 50.4 44.9 96.9 79.7 137.9l1.8 2.1a32.12 32.12 0 0035.1 9.5l81.9-29.1c29.8 24.5 63.1 43.9 99 57.4l15.8 85.4a32.05 32.05 0 0025.8 25.7l2.7.5a449.4 449.4 0 00159 0l2.7-.5a32.05 32.05 0 0025.8-25.7l15.7-85a350 350 0 0099.7-57.6l81.3 28.9a32 32 0 0035.1-9.5l1.8-2.1c34.8-41.1 61.6-87.5 79.7-137.9l.9-2.6c4.5-12.3.8-26.3-9.3-35zM788.3 465.9c2.5 15.1 3.8 30.6 3.8 46.1s-1.3 31-3.8 46.1l-6.6 40.1 74.7 63.9a370.03 370.03 0 01-42.6 73.6L721 702.8l-31.4 25.8c-23.9 19.6-50.5 35-79.3 45.8l-38.1 14.3-17.9 97a377.5 377.5 0 01-85 0l-17.9-97.2-37.8-14.5c-28.5-10.8-55-26.2-78.7-45.7l-31.4-25.9-93.4 33.2c-17-22.9-31.2-47.6-42.6-73.6l75.5-64.5-6.5-40c-2.4-14.9-3.7-30.3-3.7-45.5 0-15.3 1.2-30.6 3.7-45.5l6.5-40-75.5-64.5c11.3-26.1 25.6-50.7 42.6-73.6l93.4 33.2 31.4-25.9c23.7-19.5 50.2-34.9 78.7-45.7l37.9-14.3 17.9-97.2c28.1-3.2 56.8-3.2 85 0l17.9 97 38.1 14.3c28.7 10.8 55.4 26.2 79.3 45.8l31.4 25.8 92.8-32.9c17 22.9 31.2 47.6 42.6 73.6L781.8 426l6.5 39.9zM512 326c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm79.2 255.2A111.6 111.6 0 01512 614c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 01400 502c0-29.9 11.7-58 32.8-79.2C454 401.6 482.1 390 512 390c29.9 0 58 11.6 79.2 32.8A111.6 111.6 0 01624 502c0 29.9-11.7 58-32.8 79.2z"></path></svg>
+                    <span>系统设置</span>
+                </a>
+                <a class="list-group-item noradius" href="{{ url_for('admin.product') }}" datatype="second-menu">
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="product" fill="currentColor" aria-hidden="true" style="width: 16px; height: 16px; margin-right: 7px; vertical-align: -.15em;">
+                        <path d="M457.536 532.736l-312.512-181.76C135.616 345.472 128 348.8 128 358.208v326.208c0 9.472 7.68 21.632 17.024 27.008l312.512 181.76c9.344 5.568 17.024 2.24 17.024-7.232V559.872c0-9.536-7.68-21.632-17.024-27.136z m421.312-181.76l-312.32 181.76c-9.408 5.504-17.088 17.6-17.088 27.072v326.272c0 9.472 7.68 12.8 17.024 7.232l312.512-181.76c9.408-5.504 17.024-17.6 17.024-27.008V358.208c0-9.408-7.68-12.736-17.152-7.232z m-19.904-90.368L525.888 67.2a28.672 28.672 0 0 0-26.368 0L166.528 260.608c-7.36 4.288-7.36 11.136 0 15.36l332.992 193.472a28.672 28.672 0 0 0 26.368 0l333.056-193.408c7.296-4.288 7.296-11.2 0-15.36z"></path>
+                    </svg>
+                    <span>产品</span>
+                </a>
+                <a class="list-group-item noradius" href="{{ url_for('admin.access_log') }}" datatype="second-menu">
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="setting" fill="currentColor" aria-hidden="true" style="width: 16px; height: 16px; margin-right: 7px; vertical-align: -.15em;">
+                        <path d="M504.13231 853.747431c2.845815 2.431376 5.794983 3.443425 8.952906 3.443425 8.011464 0 16.717753-6.27389 23.613814-11.224646l31.28247-22.438035c4.296863-1.000793 8.202822-2.212388 11.630898-3.758604 1.473561 0.836041 3.133364 1.704828 4.783956 2.75781l8.704243 5.317099 12.980639-17.690918-8.794293-5.296633c-0.246617-0.23536-0.589424-0.396019-0.836041-0.562818 3.698229-8.571213 2.28095-18.507516-4.090155-28.246321-8.969279-13.799284-29.201066-27.802206-49.260937-26.188452-15.3455 1.172709-22.00313 8.075933-24.808012 13.640672-6.442736 12.875239 2.255367 29.509081 8.570189 39.014572-0.463558 0.50756-0.846274 0.99056-1.204431 1.483794-2.965541-0.214894-6.081509-0.538259-9.351995-0.940418-34.998095-3.950985-41.685401-10.818393-42.977837-12.815887-1.841951-3.15997 1.459235-9.546424 4.256954-15.301498 4.201695-8.235568 9.367345-18.464537 3.243881-28.031427-6.272867-9.788947-20.573571-11.92561-32.289404-12.827143-23.760147-1.64957-34.734082 6.979972-39.620369 14.484899-17.993816 28.046776 20.999266 83.97967 28.977985 94.921883l19.527752-11.790534c-16.108886-21.928429-36.162618-60.145845-28.290323-72.360028 2.64627-4.145413 11.05273-4.415566 17.564028-4.021593 9.231245 0.665149 12.759605 2.228761 13.511735 1.828648-0.326435 1.934049-2.431376 6.083555-3.774977 8.91402-4.738931 9.268084-11.151991 21.937638-3.5038 34.535561 7.373944 12.053524 25.13854 19.300578 57.425897 23.214724C495.219313 845.686848 499.612367 849.585645 504.13231 853.747431zM739.639069 713.369264l0 188.709943L128.737548 902.079206 128.737548 121.974006 739.639069 121.974006l0 346.277608 17.936511-15.663748 0 1.707898 46.765093-42.553165 0.055259-0.047072 0 0L804.395932 61.491493l0 0L64.022641 61.491493l0 0 0 901.017014 0 0 740.373291 0 0 0L804.395932 662.677744l0-0.008186-0.01535 0.016373L739.639069 713.369264zM828.210313 420.977937 828.210313 420.977937l88.267323 80.467683 0 0 41.312918-37.678134 0 0-88.324628-80.287581 0 0.00614L828.210313 420.977937 828.210313 420.977937zM618.039593 612.317777l88.300069 80.422657 0 0 200.499453-182.615131 0 0-88.227414-80.377632 0 0.008186L618.039593 612.317777 618.039593 612.317777zM568.13295 738.127134l0 0.004093 113.252367-22.661116 0 0 9.655917-8.738012 0 0-88.341001-80.378655 0 0.004093-9.574053 8.720615L568.13295 738.127134zM539.625686 772.279978c0 0 1.13894-0.88516 5.460362-1.283226 0.342808-0.048095 0.645706-0.048095 1.037632-0.048095 8.512884 0 20.47124 7.222495 26.251897 15.95232 0.772596 1.331321 2.25639 3.826142 2.581802 6.357801l-1.61887-0.705058-15.544021 11.04966c-0.854461 0.246617-1.817392 0.334621-2.736321 0.382717l0.74292-0.817622-5.189186-6.489808c-7.869225-9.697873-12.636808-21.642926-10.978029-24.39869L539.625686 772.279978zM624.912118 857.107969l2.032286-21.211091c-61.010539-4.880147-96.813976 39.885406-98.241488 41.774429l19.021216 12.292977C548.098661 889.606127 576.832076 853.41281 624.912118 857.107969L624.912118 857.107969zM663.03539 861.44781l2.924609-21.529339-23.183002-2.570545-2.949168 21.544689L663.03539 861.44781zM278.311145 167.874405l311.745117 0 0 42.615587L278.311145 210.489992 278.311145 167.874405zM183.095573 277.852192 670.146345 277.852192l0 23.985274L183.095573 301.837466 183.095573 277.852192zM183.095573 349.591073 670.146345 349.591073l0 24.121374L183.095573 373.712447 183.095573 349.591073zM183.095573 423.339728 670.146345 423.339728l0 24.047696L183.095573 447.387423 183.095573 423.339728zM183.095573 498.238578 670.146345 498.238578l0 23.924899L183.095573 522.163477 183.095573 498.238578z"></path>
+                    </svg>
+                    <span>访问日志</span>
+                </a>
+                <a class="list-group-item noradius" href="{{ url_for('admin.user') }}" datatype="second-menu">
+                    <svg viewBox="64 64 896 896" focusable="false" data-icon="setting" fill="currentColor" aria-hidden="true" style="width: 16px; height: 16px; margin-right: 7px; vertical-align: -.15em;">
+                        <path d="M824.2 699.9a301.55 301.55 0 00-86.4-60.4C783.1 602.8 812 546.8 812 484c0-110.8-92.4-201.7-203.2-200-109.1 1.7-197 90.6-197 200 0 62.8 29 118.8 74.2 155.5a300.95 300.95 0 00-86.4 60.4C345 754.6 314 826.8 312 903.8a8 8 0 008 8.2h56c4.3 0 7.9-3.4 8-7.7 1.9-58 25.4-112.3 66.7-153.5A226.62 226.62 0 01612 684c60.9 0 118.2 23.7 161.3 66.8C814.5 792 838 846.3 840 904.3c.1 4.3 3.7 7.7 8 7.7h56a8 8 0 008-8.2c-2-77-33-149.2-87.8-203.9zM612 612c-34.2 0-66.4-13.3-90.5-37.5a126.86 126.86 0 01-37.5-91.8c.3-32.8 13.4-64.5 36.3-88 24-24.6 56.1-38.3 90.4-38.7 33.9-.3 66.8 12.9 91 36.6 24.8 24.3 38.4 56.8 38.4 91.4 0 34.2-13.3 66.3-37.5 90.5A127.3 127.3 0 01612 612zM361.5 510.4c-.9-8.7-1.4-17.5-1.4-26.4 0-15.9 1.5-31.4 4.3-46.5.7-3.6-1.2-7.3-4.5-8.8-13.6-6.1-26.1-14.5-36.9-25.1a127.54 127.54 0 01-38.7-95.4c.9-32.1 13.8-62.6 36.3-85.6 24.7-25.3 57.9-39.1 93.2-38.7 31.9.3 62.7 12.6 86 34.4 7.9 7.4 14.7 15.6 20.4 24.4 2 3.1 5.9 4.4 9.3 3.2 17.6-6.1 36.2-10.4 55.3-12.4 5.6-.6 8.8-6.6 6.3-11.6-32.5-64.3-98.9-108.7-175.7-109.9-110.9-1.7-203.3 89.2-203.3 199.9 0 62.8 28.9 118.8 74.2 155.5-31.8 14.7-61.1 35-86.5 60.4-54.8 54.7-85.8 126.9-87.8 204a8 8 0 008 8.2h56.1c4.3 0 7.9-3.4 8-7.7 1.9-58 25.4-112.3 66.7-153.5 29.4-29.4 65.4-49.8 104.7-59.7 3.9-1 6.5-4.7 6-8.7z"></path>
+                    </svg>
+                    <span>网站用户</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="content_box">
+        <nav aria-label="breadcrumb" style="border-radius: 5px">
+            <ol class="breadcrumb" style="box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05); background-color: #ffffff;">
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('admin.cms_index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16"><path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/><path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z" /></svg>&ensp;控制台
+                    </a>
+                </li>
+                {% block ol %}<li class="breadcrumb-item active">{{ title }}</li>{% endblock %}
+            </ol>
+        </nav>
+        <div class="row">
+            {% block content_main %}{% endblock %}
+        </div>
+    </div>
+
+
+</body>
+</html>

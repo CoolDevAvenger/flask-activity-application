@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project_ws</title>
+    <link href="/static/dashboard/detail.css" rel="stylesheet"/>
+    <script src="/static/common/jquery.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='common/sweetalert2/sweetalert2.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='common/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/sweetalert2/promise.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/sweetalert2/xtalert.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='common/xtajax.js') }}"></script>
+</head>
+
+<body>
+    <div>
+        <div class="header">
+            <div class="head">
+                <div class="inner">
+                    <div class="img1">
+                        <img src="/static/dashboard/images/img1.png"/>
+                    </div>
+                    <div class="logo">
+                        <a href="#">
+                            <img src="/static/dashboard/images/logo.png"/>
+                        </a>
+                    </div>
+                    <div class="top-search" id="top_search">
+                        <img src="/static/dashboard/images/topSearch.png"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar">
+            <div class="announce">
+                <div class="news">
+                    <div class="news-content">
+                        <div class="news-mask">
+                            <marquee> Đã xử lý thành côngTHUA XỔ SỐ VN SIÊU TỐC NHẬN NGAY 20.000.000Đ <b>scroll</b> from <span style="color: #5fff18;">our service</span> right to left</marquee>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav">
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <a href="#" target="_blank">
+                                <span class="icbx"><img src="/static/dashboard/images/ic1.png" alt=""></span>Miễn phí đăng ký
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <span class="icbx"><img src="/static/dashboard/images/ic2.png" alt=""></span>Địa chỉ web
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <span class="icbx"><img src="/static/dashboard/images/ic3.png" alt=""></span>Tải APP
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <span class="icbx"><img src="/static/dashboard/images/ic4.png" alt=""></span>CSKH
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="inner">
+                <div class="subtitle">
+                    <div class="subtitle-content"></div>
+                    <a href="/dashboard" class="backhome">Quay lại trang chủ</a>
+                </div>
+                <div class="subcontent">
+                    <div class="form-input">
+                        <div class="apply-attr">
+                            <div>
+                                <div class="form-name">Tên đăng nhập：</div>
+                                <div class="form-input">
+                                    <input type="text" placeholder="Vui lòng nhập Tên đăng nhập" class="taninpt" id="account">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-name">Mã xác nhận：</div>
+                                <div class="form-input">
+                                    <input type="text" placeholder="Vui lòng nhập Tên đăng nhập" class="taninpt" style="width: 210px; margin-right: 2px;" id="graph_captcha">
+                                    <div class="input-group-append" style="height: 35px; padding-left: 8px;">
+                                        <span class="input-group-text p-0">
+                                            <img class="input-group-text p-0" id="imgCapBtn" style="width: 100%; height: 100%; display: block; border: none; cursor: pointer;" src="{{ img_cap }}" alt="">
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-name">&nbsp;</div> 
+                                <div class="form-input"><a href="javascript:;" class="tanbtn1 layerbtn" id="submit_apply">Bấm để áp dụng</a></div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cl h20"></div>
+            <div class="inner">
+                <div class="subcontent-frame">
+                    <img id="detail_frame" src="{{ product.detailImg }}">
+                </div>
+            </div>
+        </div>
+        <div class="cl h10"></div>
+        <div class="footer">
+            <div class="fimg">
+                <img src="/static/dashboard/images/fimg.png" alt="">
+            </div> 
+            <div class="cop">
+                CopyRight QH88 Reserved
+            </div>
+        </div>
+    </div>
+    <div class="layerbox" id="search_modal">
+        <div class="layerconts">
+            <div class="logox">
+                <img src="/static/dashboard/images/logo.png" alt="">
+            </div> 
+            <div class="close"></div> 
+            <div class="tlbox">
+                Kiểm Tra Kết Quả Xét Duyệt
+            </div> 
+            <div class="forminpt">
+                <div>
+                    <div class="foemzuo">Tên đăng nhập：</div> 
+                    <div class="fontyou">
+                        <input type="text" placeholder="Tên đăng nhập" class="taninpt">
+                    </div> 
+                    <div class="cl"></div>
+                </div> 
+                <div>
+                    <div class="foemzuo">Chọn mục tìm kiếm：</div> 
+                    <div id="Act_Select" class="fontyou">
+                        <select class="taninpt">
+                            <option value="122">THUA XỔ SỐ VN SIÊU TỐC NHẬN NGAY 20.000.000Đ</option>
+                            <option value="114">CON ONG CHĂM CHỈ NHẬN NGAY ƯU ĐÃI 12.000.000Đ</option>
+                            <option value="113">HOÀN TRẢ SLOT &amp; BẮN CÁ THƯỞNG CAO LÊN ĐẾN 10.888.888</option>
+                            <option value="125">THƯỞNG THẮNG HOẶC THUA THỂ THAO LIÊN TIẾP</option>
+                            <option value="129">XỔ SỐ VN THẮNG HOẶC THUA LIÊN TIẾP HOÀN TRẢ LÊN ĐẾN 50%</option>
+                            <option value="108">ĐĂNG KÝ TẶNG 6 TỶ BAO LÌ XÌ</option>
+                            <option value="109">THƯỞNG THẮNG LIÊN TIẾP GAME BÀI 20%</option>
+                            <option value="132">CHINH PHỤC ĐẲNG CẤP VIP CÙNG QH88</option>
+                            <option value="131">KHUYẾN MÃI [NỔ HŨ] [BẮN CÁ] TẶNG 100% </option>
+                        </select> 
+                        <div class="cl"></div>
+                    </div> 
+                    <div>
+                        <div class="foemzuo">&nbsp;</div> 
+                        <div class="fontyou">
+                            <a href="javascript:;" class="tanbtn1 layerbtn">Tìm kiếm</a>
+                        </div> 
+                        <div class="cl"></div>
+                    </div> 
+                    <div class="cl h30"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+    if (oWidth < 1024) {
+        window.location.href = `/dashboard/mbdetail?vid={{product.uuid}}`;
+    } else {
+    }
+    window.addEventListener("orientationchange", function () {
+        var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        if (oWidth < 1024) {
+            window.location.href = `/dashboard/mbdetail?vid={{product.uuid}}`;
+        } else {
+        }
+    }, false);
+    window.addEventListener("resize", function () {
+        var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        if (oWidth < 1024) {
+            window.location.href = `/dashboard/mbdetail?vid={{product.uuid}}`;
+        } else {
+        }
+    }, false);
+
+    var closeBtns = document.querySelectorAll(".close");
+    closeBtns.forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById("search_modal").style.display = "none";
+        });
+    });
+
+    document.getElementById("top_search").addEventListener("click", function() {
+        document.getElementById("search_modal").style.display = "block";
+    })
+
+    $(function () {
+        $("#imgCapBtn").on('click', function () {
+            xtajax.get({
+                'url':'{{ url_for('common.img_cap') }}',
+                'success': function (data) {
+                    $('#imgCapBtn').attr('src', data);
+                }
+            })
+        })
+    
+        $("#submit_apply").on('click', function () {
+            let login_account = $.trim($("#account").val())
+            let graph_captcha = $.trim($("#graph_captcha").val())
+            if (!login_account){return xtalert.alertError('请输入登录账户！')}
+            if (!graph_captcha){return xtalert.alertError('请输入验证码！')}
+            Swal({
+                title: false,
+                text: '数据提交中...',
+                showCloseButton: false,
+                showCancelButton: false,
+                showconfirmButton: false,
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+            xtajax.post({
+                data: {'action': 'submitApply', 'account': login_account, 'graph_captcha': graph_captcha, 'uuid': `{{product.uuid}}`},
+                success: function (data) {
+                    if (data.code === 200){
+                        xtalert.alertSuccessToast('登录成功！');
+                        reloadpage();
+                    }else {
+                        xtalert.alertErrorToast(data.message)
+                    }
+                }
+            })
+
+        })
+    })
+    
+</script>
+</html>

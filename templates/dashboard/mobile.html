@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=640,maximum-scale=1,user-scalable=no">
+    <title>Document</title>
+    <link href="/static/dashboard/mobile.css" rel="stylesheet"/>
+</head>
+
+<body>
+    <div>
+        <div>
+            <div class="header">
+                <div class="logo">
+                    <h1><a href="#"><img src="/static/dashboard/images/mb/logo.png" alt=""></a></h1>
+                </div>
+                <div class="img1"><img src="/static/dashboard/images/mb/img1.png" alt=""></div>
+                <div class="top-search" id="top_search">
+                    <a href="javascript:;">
+                        <img src="/static/dashboard/images/mb/top-search.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="present">
+                <div class="newbox">
+                    <div class="inner">
+                        <div class="newin">
+                            <div class="lunleft">
+                                <marquee>
+                                    nh công THUA XỔ SỐ VN SIÊU TỐC NHẬN NGAY 20.000.000Đ	Xin chúc mừng：DBa******* Đã xử  lý thành công THUA XỔ SỐ VN SIÊU TỐC NHẬN NGA 	Xin chúc mừng：so
+                                    n***** Đã xử lý thành công THUnh công THUA XỔ SỐ VN SIÊU TỐC NHẬN NGAY 20.000.000Đ	Xin chúc mừng：DBa******* Đã xử  lý thành công THUA XỔ SỐ VN SIÊU TỐC NHẬN NGA 	Xin chúc mừng：son
+                                </marquee>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="list-item">
+                {% for item in data %}
+                <li >
+                    <div class="yhbtns-2">
+                        <a href="javascript:void(0);" class="asimg">
+                            <img src="/static/uploads/images/list1.png" errorurl="" alt="" msg="{{ item.message }}">
+                        </a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="tishibx">
+                Nhắc nhở: Vui lòng chọn hạng mục hoạt động tương ứng để đăng ký. Sau khi gửi đơn đăng ký, ủy viên sẽ
+                  Xem xét và xử lý trong vòng vài giờ. Sau khi gửi đơn đăng ký, bạn có thể nhấp vào truy vấn tiến độ xem xét!
+             </div>
+             <div style="height: 100px; clear: both;"></div>
+            <div class="nav">
+                <a href="#" target="_blank">
+                    <span class="nvig">
+                        <img src="/static/dashboard/images/ic1.png" alt=""/>
+                    </span>
+                    "Miễn phí đăng ký"
+                </a>
+                <a href="#" target="_blank">
+                    <span class="nvig">
+                        <img src="/static/dashboard/images/ic2.png" alt=""/>
+                    </span>
+                    "Địa chỉ web"
+                </a>
+                <a href="#" target="_blank">
+                    <span class="nvig">
+                        <img src="/static/dashboard/images/ic3.png" alt=""/>
+                    </span>
+                    "Tải APP"
+                </a>
+                <a href="#" target="_blank">
+                    <span class="nvig">
+                        <img src="/static/dashboard/images/ic4.png" alt=""/>
+                    </span>
+                    "CSKH"
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="product_modal">
+        <div class="modal-content">
+            <div class="close"></div>
+            <div class="layerbox-msg" id="product_message">
+                Thời gian đăng ký nhận khuyến mại từ 8h00 - 20h00 hàng ngày
+            </div>
+        </div>
+    </div>
+    <div class="layerbox layer2" id="search_modal">
+        <div class="layerconts">
+            <div class="logox">
+                <img src="/static/dashboard/images/logo.png" alt="">
+            </div> 
+            <div class="close"></div> 
+            <div class="tlbox">Kiểm tra tiến độ</div> 
+            <div class="forminpt">
+                <div>
+                    <div class="foemzuo">Tên đăng nhập：</div> 
+                    <div class="fontyou">
+                        <input type="text" placeholder="Tài khoản thành viên" class="taninpt">
+                    </div> 
+                    <div class="cl"></div>
+                </div> 
+                <div>
+                    <div class="foemzuo">Chọn mục truy vấn：</div> 
+                    <div id="Act_Select" class="fontyou">
+                        <select class="taninpt">
+                            <option value="122">THUA XỔ SỐ VN SIÊU TỐC NHẬN NGAY 20.000.000Đ</option>
+                            <option value="114">CON ONG CHĂM CHỈ NHẬN NGAY ƯU ĐÃI 12.000.000Đ</option>
+                            <option value="113">HOÀN TRẢ SLOT &amp; BẮN CÁ THƯỞNG CAO LÊN ĐẾN 10.888.888</option>
+                            <option value="125">THƯỞNG THẮNG HOẶC THUA THỂ THAO LIÊN TIẾP</option>
+                            <option value="129">XỔ SỐ VN THẮNG HOẶC THUA LIÊN TIẾP HOÀN TRẢ LÊN ĐẾN 50%</option>
+                            <option value="108">ĐĂNG KÝ TẶNG 6 TỶ BAO LÌ XÌ</option>
+                            <option value="109">THƯỞNG THẮNG LIÊN TIẾP GAME BÀI 20%</option>
+                            <option value="132">CHINH PHỤC ĐẲNG CẤP VIP CÙNG QH88</option>
+                            <option value="131">KHUYẾN MÃI [NỔ HŨ] [BẮN CÁ] TẶNG 100% </option>
+                        </select>
+                    </div> 
+                    <div>
+                        <div class="foemzuo">&nbsp;</div> 
+                        <div class="fontyou">
+                            <a href="javascript:;" class="tanbtn1 layerbtn">Bấm Để Kiểm Tra</a>
+                        </div> 
+                        <div class="cl"></div>
+                    </div> 
+                    <div class="cl h30"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+    if (oWidth < 1024) {
+    }
+    else {
+        window.location.href = "/dashboard";
+    }
+    window.addEventListener("orientationchange", function () {
+        var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        if (oWidth < 1024) {
+        }
+        else {
+            window.location.href = "/dashboard";
+        }
+    }, false);
+    window.addEventListener("resize", function () {
+        var oWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        if (oWidth < 1024) {
+        }
+        else {
+            window.location.href = "/dashboard";
+        }
+    }, false);
+
+    var elements = document.querySelectorAll(".yhbtns-2");
+    elements.forEach(function(element) {
+        element.addEventListener('click', function(e) {
+            console.log(e.target);
+            document.getElementById("product_message").innerHTML = e.target.getAttribute("msg");
+            document.getElementById("product_modal").style.display = "block";
+        });
+    });
+
+    var closeBtns = document.querySelectorAll(".close");
+    closeBtns.forEach(function(element) {
+        element.addEventListener('click', function() {
+            document.getElementById("product_modal").style.display = "none";
+            document.getElementById("search_modal").style.display = "none";
+        });
+    });
+
+    document.getElementById("top_search").addEventListener("click", function() {
+        document.getElementById("search_modal").style.display = "block";
+    })
+</script>
+</html>
